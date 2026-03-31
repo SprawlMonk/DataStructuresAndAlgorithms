@@ -43,6 +43,22 @@ public class ArrayList<T> {
      */
     public void addToFront(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (data == null) {
+            throw new IllegalArgumentException("Data cannot be null");
+
+        } else if (size == backingArray.length) {
+            T[] newArray = (T[]) new Object[backingArray.length * 2];
+            for (int i = 0; i < size; i++) {
+                newArray[i + 1] = backingArray[i];
+            }
+            backingArray = newArray;
+        } else if (size < backingArray.length) {
+            for(int i = size; i > 0; i--){
+                backingArray[i+1] = backingArray[i];
+            }
+        }
+        backingArray[0] = data;
+        size++;
     }
 
     /**
@@ -55,7 +71,20 @@ public class ArrayList<T> {
      */
     public void addToBack(T data) {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
-    }
+        if (data == null) {
+            throw new IllegalArgumentException("Data cannot be null");
+        }
+        if (size == backingArray.length) {
+            T[] newArray = (T[]) new Object[backingArray.length * 2];
+            for (int i = 0; i < size; i++) {
+                newArray[i] = backingArray[i];
+            }
+            backingArray = newArray;
+        }
+        backingArray[size] = data;
+        size++;
+        }
+
 
     /**
      * Removes and returns the first data of the list.
@@ -71,6 +100,16 @@ public class ArrayList<T> {
      */
     public T removeFromFront() {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (size == 0) {
+            throw new NoSuchElementException("List is empty");
+        }
+        T data = backingArray[0];
+        for (int i = 0; i < size - 1; i++) {
+            backingArray[i] = backingArray[i + 1];
+        }
+        backingArray[size - 1] = null;
+        size--;
+        return data;
     }
 
     /**
@@ -85,6 +124,13 @@ public class ArrayList<T> {
      */
     public T removeFromBack() {
         // WRITE YOUR CODE HERE (DO NOT MODIFY METHOD HEADER)!
+        if (size == 0) {
+            throw new NoSuchElementException("List is empty");
+        }
+        T data = backingArray[size - 1];
+        backingArray[size - 1] = null;
+        size--;
+        return data;
     }
 
     /**
