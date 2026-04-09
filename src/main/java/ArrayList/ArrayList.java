@@ -48,13 +48,13 @@ public class ArrayList<T> {
 
         } else if (size == backingArray.length) {
             T[] newArray = (T[]) new Object[backingArray.length * 2];
-            for (int i = 0; i < size; i++) {
+            for (int i = size - 1; i >= 0; i--) {
                 newArray[i + 1] = backingArray[i];
             }
             backingArray = newArray;
         } else if (size < backingArray.length) {
             for(int i = size; i > 0; i--){
-                backingArray[i+1] = backingArray[i];
+                backingArray[i + 1] = backingArray[i];
             }
         }
         backingArray[0] = data;
